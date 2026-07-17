@@ -28,7 +28,11 @@ ENV TOMCAT_VERSION=9.0.91
 RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz \
     && tar -xzf apache-tomcat-${TOMCAT_VERSION}.tar.gz \
     && mv apache-tomcat-${TOMCAT_VERSION} /usr/local/tomcat \
-    && rm -xzf apache-tomcat-${TOMCAT_VERSION}.tar.gz || true
+    && rm -f apache-tomcat-${TOMCAT_VERSION}.tar.gz
+
+# Delete default webapps to ensure ROOT.war takes full precedence
+RUN rm -rf /usr/local/tomcat/webapps/*
+
 ENV CATALINA_HOME=/usr/local/tomcat
 ENV PATH=$CATALINA_HOME/bin:$PATH
 
