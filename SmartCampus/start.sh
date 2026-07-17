@@ -38,6 +38,10 @@ DELETE FROM campus_locations;
 INSERT INTO campus_locations (name, latitude, longitude) VALUES ('Main Gate', 85.0, 15.0), ('Administrative Block', 50.0, 30.0), ('Academic Blocks', 30.0, 50.0), ('Library', 50.0, 55.0), ('Computer Labs', 32.0, 68.0), ('Canteen', 75.0, 35.0), ('Auditorium', 65.0, 75.0), ('Hostel', 40.0, 85.0), ('Parking Area', 25.0, 20.0), ('Sports Ground', 80.0, 80.0);
 "
 
+# Clean default Tomcat webapps directories at runtime to ensure ROOT.war takes full precedence
+echo "Cleaning default webapps to ensure ROOT.war is unpacked cleanly..."
+rm -rf /usr/local/tomcat/webapps/ROOT /usr/local/tomcat/webapps/examples /usr/local/tomcat/webapps/manager /usr/local/tomcat/webapps/host-manager /usr/local/tomcat/webapps/docs
+
 # Start Tomcat in foreground
 echo "Starting Tomcat..."
 catalina.sh run
